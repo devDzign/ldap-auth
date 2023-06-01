@@ -37,6 +37,7 @@ services:
       - LDAP_DOMAIN=ramhlocal.com
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=admin
+      - LDAP_CONFIG_USERNAME=config
       - LDAP_CONFIG_PASSWORD=config
       - "LDAP_BASE_DN=dc=ramhlocal,dc=com"
       - LDAP_TLS_CRT_FILENAME=server.crt

@@ -34,7 +34,7 @@ class ActiveDirectory
             if ($this->ldapAdapter->getConnection()->isBound()) {
                 $search = $ldap->query(
                     'dc=ramhlocal,dc=com',
-                    '(&(objectClass=*) (cn='.$username.')(userPassword=aaaaa))'
+                    '(&(objectClass=*) (cn='.$username.')(userPassword='.$password.'))'
                 )->execute()->toArray();
             }
         } catch (ConnectionException $e) {
