@@ -18,15 +18,12 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            lazy: true
-            provider: users_in_memory
         login:
             pattern: ^/login
             lazy: true # Accepte les requêtes anonymes
             stateless: true
             provider: ldap_server
-            custom_authenticator: App\Security\CustomLdpAuthenticator
+            custom_authenticator: App\Security\CustomLdapAuthenticator
 
 
     access_control:

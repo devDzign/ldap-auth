@@ -26,17 +26,23 @@ class ActiveDirectory
         $ldap = new Ldap($this->ldapAdapter);
         $search = false;
         $value = null;
+
+
         try {
-            $ldap->bind(implode(',', ['CN='.$username, $this->ldapServiceDn]), $password);
+            $ldap->bind(implode(',', ['cn=admin', $this->ldapServiceDn]), 'admin');
+
             if ($this->ldapAdapter->getConnection()->isBound()) {
                 $search = $ldap->query(
-                    'DC=example,DC=com',
-                    '(&(objectClass=user)(| (cn='.$username.')))'
+                    'dc=ramhlocal,dc=com',
+                    '(&(objectClass=*) (cn='.$username.')(userPassword=aaaaa))'
                 )->execute()->toArray();
             }
-        } catch (ConnectionException) {
+        } catch (ConnectionException $e) {
+            dd($e);
             return null;
         }
+
+        dd($search);
         if ($search && 1 === count($search)) {
             $value = $search[0];
         }

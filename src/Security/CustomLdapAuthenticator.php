@@ -43,6 +43,7 @@ class CustomLdapAuthenticator extends AbstractAuthenticator implements Authentic
     /* CETTE FONCTION EST APPELLE POUR CHAQUE REQUÊTE, C'EST A NOUS DE DÉCIDER SI ON APPLIQUE LE CONTRÔLE D'IDENTIFICATION OU NON */
     public function supports(Request $request): ?bool
     {
+
         /* TEST SI LA ROUTE est /login A PARTIR DE L'API  && SI LA METHODE EST DE TYPE POST
 			-> SI C'EST LE CAS, ON DECLENCHE L'AUTHENTIFICATION,
 			-> SINON, ON IGNORE L'AUTHENTICATOR
@@ -52,6 +53,7 @@ class CustomLdapAuthenticator extends AbstractAuthenticator implements Authentic
 
     public function authenticate(Request $request): SelfValidatingPassport
     {
+
         /* TEST SI LE CONTENT-TYPE EST OK */
         if ('json' !== $request->getContentTypeFormat() || null === $request->getContentTypeFormat()) {
             throw new CustomUnsupportedMediaTypeException('WRONG CONTENT-TYPE');
@@ -66,9 +68,11 @@ class CustomLdapAuthenticator extends AbstractAuthenticator implements Authentic
         $loginFromRequest = $body->username;
         $passwordFromRequest = $body->password;
 
+
+
         /* RECUPERE L'UTILISATEUR DANS LE LDAP (AUTHENTIFIE AU PASSAGE L'UTILISATEUR) */
         $ldapEntry = $this->activeDirectory->getEntryFromActiveDirectory($loginFromRequest, $passwordFromRequest);
-
+        dd($ldapEntry);
         if (null === $ldapEntry) { /* SI ON NE RECUPERE RIEN */
             throw new UserNotFoundException('IMPOSSIBLE TO RETRIEVE THE RESOURCE'); /* ON RENVOIE UN ERREUR D'AUTHENTIFICATION */
         } else { /* SINON L'UTILISATEUR EXISTE DANS LE LDAP */

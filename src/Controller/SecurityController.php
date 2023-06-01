@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/security', name: 'login', methods: ['POST'])]
-        public function login(): Response
+    #[Route('/login', name: 'login', methods: ['POST'])]
+    public function login(): Response
     {
         /* THIS CONTROLLER NEVER RESPOND */
         return $this->json('', Response::HTTP_OK);
