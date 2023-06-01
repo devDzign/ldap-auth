@@ -28,8 +28,15 @@ services:
     Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
         arguments:
             - host: '%env(LDAP_HOST)%'
-              port: 389
+              port: 1636
                 #encryption: tls
               options:
                   protocol_version: 3
                   referrals: false
+
+
+    App\Service\ActiveDirectory:
+        bind:
+            $ldapServiceDn: '%env(SERVICE_DN_AD)%'
+            $ldapServiceUser: '%env(SERVICE_USER_AD)%'
+            $ldapServicePassword: '%env(SERVICE_PASSWORD_AD)%'

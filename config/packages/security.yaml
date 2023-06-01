@@ -11,7 +11,7 @@ security:
                 base_dn: '%env(BASE_DN_LDAP_USER_PROVIDER)%' # Domaine dans le LDAP
                 search_dn: '%env(SEARCH_DN_LDAP_USER_PROVIDER)%' # Utilisateur dans l'AD (readonly)
                 search_password: '%env(SEARCH_PASSWORD_LDAP_USER_PROVIDER)%' # Mot passe de l'utilisateur dans l'AD (readonly)
-                uid_key: sAMAccountName
+                uid_key: uid
                 default_roles: ROLE_USER
 
     firewalls:
